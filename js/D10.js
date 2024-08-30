@@ -256,7 +256,7 @@ function searchByTitle(str) {
 */
 
 function creatConteiner() {
-  const container = document.getElementById("container");
+  return document.getElementById("container");
 }
 console.log(creatConteiner);
 
@@ -264,8 +264,10 @@ console.log(creatConteiner);
   Scrivi una funzione per selezionare ogni tag <td> all'interno della pagina.
 */
 function selectAllTd() {
-  const allTd = document.querySelectorAll("td");
+  return document.querySelectorAll("td");
 }
+console.log(selectAllTd());
+
 /* ESERCIZIO 22
   Scrivi una funzione che, tramite un ciclo, stampa in console il testo contenuto in ogni tag <td> all'interno della pagina.
 */
