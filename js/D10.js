@@ -106,7 +106,10 @@ console.log(deleteOne("Epicode", true));
   Es.: onlyLetters("I have 4 dogs") => ritorna "I have dogs"
 */
 
-function onlyLetters(str) {}
+function onlyLetters(str) {
+  return str.replace(/\d/g, "").replace("  ", " "); // (/\d/g, "") espressione regolare
+}
+console.log(onlyLetters("I have 4 dogs"));
 
 /* ESERCIZIO 6
   Crea una funzione chiamata "isThisAnEmail" che riceve una stringa come parametro e ritorna true se la stringa è un valido indirizzo email.
@@ -153,8 +156,11 @@ console.log(whatDayIsIt());
 */
 function howManyDays(date) {
   const today = new Date();
+  const day = today - date;
+  const giorniMancanti = Math.floor(day / (1000 * 60 * 60 * 24)); //1000 sta per millisecondi * 60 sta per secondi + 60 sta per 1 ora* 24 sta per 24 ore
+  return giorniMancanti;
 }
-howManyDays();
+console.log(howManyDays(new Date("August 28, 2000 00:00:00")));
 
 /* ESERCIZIO 10
   Scrivi una funzione chiamata "isTodayMyBirthday" che deve ritornare true se oggi è il tuo compleanno, falso negli altri casi.
@@ -166,7 +172,7 @@ function isTodayMyBirthday() {
   };
   const toDay = new Date(); //vado a prendere la data di oggi
   const day = toDay.getDate(); //vado a prendermi il giorno di oggi
-  const month = toDay.getMonth() + 1; //vado a prendere l'indice del mese che è 7 (agosto) ma con il +1 diventa 8 (agosto)
+  const month = toDay.getMonth() + 1; //vado a prendere l'indice del mese che è indice 7 (agosto) ma con il +1 diventa indice 8 (agosto)
   if (day === myBirthday.day && month === myBirthday.month) {
     return "Oggi è il tuo compleanno";
   } else {
@@ -183,7 +189,14 @@ console.log(isTodayMyBirthday());
   Scrivi una funzione chiamata "deleteProp" che riceve un oggetto e una stringa come parametri; deve ritornare l'oggetto fornito dopo aver eliminato
   in esso la proprietà chiamata come la stringa passata come secondo parametro.
 */
-function deleteProp() {}
+oggetto = { name: " marco", age: 30, gen: " m" };
+const string = "name";
+
+function deleteProp(obj, str) {
+  delete obj[str]; // andiamo a vedere all'interno dell'oggeto il contenuto della stringa.
+  return obj;
+}
+console.log(deleteProp(oggetto, string));
 
 /* ESERCIZIO 12
   Scrivi una funzione chiamata "newestMovie" che trova il film più recente nell'array "movies" fornito.
@@ -223,27 +236,29 @@ function onlyInLastMillennium(array) {
 /* ESERCIZIO 16
   Scrivi una funzione chiamata "sumAllTheYears" che ritorna la somma di tutti gli anni in cui sono stati prodotti i film contenuti nell'array "movies" fornito.
 */
-function sumAllTheYears(array) {
-  const totalYearFilm = 0;
-  array.forEach((movie) => {
-    if (movie.Year) {
-      totalYearFilm += movie.Year;
-    }
-  });
-  return totalYearFilm;
-}
 
 /* ESERCIZIO 17
   Scrivi una funzione chiamata "searchByTitle" che riceve una stringa come parametro e ritorna i film nell'array "movies" fornito che la contengono nel titolo.
 */
-function searchByTitle(str) {
-  array.forEach((movie) => {});
-}
 
 /* ESERCIZIO 18
   Scrivi una funzione chiamata "searchAndDivide" che riceve una stringa come parametro e ritorna un oggetto contenente due array: "match" e "unmatch".
   "match" deve includere tutti i film dell'array "movies" fornito che contengono la stringa fornita all'interno del proprio titolo, mentre "unmatch" deve includere tutti i rimanenti.
 */
+function searchAndDivide(array, str) {
+  const newObject = {
+    match: [],
+    unMatch: [],
+  };
+  for (let i = 0; i < array.length; i++) {
+    if (array[i].Title.toLowerCase().includes(str.toLowerCase())) {
+      newObject.match.push(array[i]);
+    } else {
+      newObject.unMatch.push(array[i]);
+    }
+  }
+  return newObject;
+}
 
 /* ESERCIZIO 19
   Scrivi una funzione chiamata "removeIndex" che riceve un numero come parametro e ritorna l'array "movies" fornito privo dell'elemento nella posizione ricevuta come parametro.
@@ -271,10 +286,26 @@ console.log(selectAllTd());
 /* ESERCIZIO 22
   Scrivi una funzione che, tramite un ciclo, stampa in console il testo contenuto in ogni tag <td> all'interno della pagina.
 */
-
+function stampTd() {
+  const td = document.querySelectorAll("td");
+  td.forEach((tdText) =>{
+  console.log(tdText.textContent)
+  })
+}
+stampTd()
 /* ESERCIZIO 23
   Scrivi una funzione per aggiungere un background di colore rosso a ogni link all'interno della pagina.
 */
+function linkColor() {
+  const link = document.querySelectorAll("a");
+  link.forEach(link => {
+    // Aggiungi uno sfondo rosso
+    link.style.backgroundColor = "red";
+});
+}
+linkColor()
+
+
 
 /* ESERCIZIO 24
   Scrivi una funzione per aggiungere un nuovo elemento alla lista non ordinata con id "myList".
@@ -439,4 +470,9 @@ console.log(newestMovie(movies));
 console.log(countMovies(movies));
 console.log(onlyTheYears(movies));
 console.log(onlyInLastMillennium(movies));
-//console.log(sumAllTheYears(movies));
+
+console.log(searchAndDivide(movies, "Avengers"));
+
+
+
+
