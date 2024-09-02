@@ -83,7 +83,7 @@ console.log(whoIsBigger(0, 5));
   Es.: splitMe("I love coding") => ritorna ["I", "Love", "Coding"]
 */
  const spliteMe =function (str) {
-  return str.split(" ");
+  const stringa = str.split(" ");
 }
 
 console.log(spliteMe("sono uno studente di Epicode"));
@@ -93,7 +93,7 @@ console.log(spliteMe("sono uno studente di Epicode"));
   Se il valore booleano è true la funzione deve ritornare la stringa senza il primo carattere, altrimenti la deve ritornare senza l'ultimo.
 */ 
 const deleteOne=function (str, booleano) {
-  if (booleano === true) {
+  if (booleano) {
     return str.slice(1);
   } else {
     return str.slice(0, -1);
@@ -125,7 +125,7 @@ console.log(onlyLetters("I have 4 dogs"));
 */
 const isThisAnEmail =function (str) {
   //includes serve a ricercare un valore contenuto nella stringa.il valore lo indichiamo noi
-  if (str.includes("@")) {
+  if (str.includes("@")&&str.includes(".")) {
     return true;
   } else {
     return false;
@@ -167,6 +167,19 @@ console.log(whatDayIsIt());
       values: [3, 3, 4]
   }
 */
+const rollTheDices=function(n){
+  const obj={
+    sum : 0,
+    values:[],
+  }
+  for(let i=0; i < n; i++){
+    const newDice= dice();
+    obj.sum+=newDice;
+    obj.values.push(newDice);
+  }
+ return obj
+}
+console.log(rollTheDices(3));
 
 /* ESERCIZIO 9
   Scrivi una funzione chiamata "howManyDays" che riceve una data come parametro e ritorna il numero di giorni trascorsi da tale data.
